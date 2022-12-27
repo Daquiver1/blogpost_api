@@ -1,4 +1,4 @@
-# CreditAPI
+# BlogPostAPI
 
 Endpoints for Blog Post api
 
@@ -11,7 +11,7 @@ Endpoints for Blog Post api
 Follow the format specified in the .env.template file and after rename .env
 
 # Setup postgres
-Create a PostgreSQL database called "CreditAPI"
+Create a PostgreSQL database called "BlogPostAPI"
 ```
 
 1. `git clone https://github.com/Daquiver1/blogpost_api.git`
