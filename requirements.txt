@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+python-multipart
+
+# auth 
+passlib
+bcrypt
+pyjwt
+
+# db
+databases[postgresql]
+SQLAlchemy
+psycopg2-binary 
+alembic

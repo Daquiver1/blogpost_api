@@ -1,0 +1,8 @@
+isort
+flake8
+black
+mypy
+flake8-bugbear
+flake8-bandit
+flake8-docstrings
+pep8-naming

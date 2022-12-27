@@ -1,0 +1,5 @@
+[flake8]
+ignore = E501, W503, E402, D401, D400, B008
+max-line-length = 100
+max-complexity = 15
+filename = src/*.py
