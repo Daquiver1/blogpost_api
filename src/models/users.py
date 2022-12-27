@@ -26,7 +26,6 @@ class CreateUser(UserBase):
 class UserPasswordUpdate(CoreModel):
     """Generated password and salt."""
 
-    uuid: str
     password: Annotated[str, Field(min_length=7, max_length=80)]
     salt: str
 

@@ -1,6 +1,6 @@
 """A model for the blog post"""
 
-from src.models.core import CoreModel, DateTimeModelMixin
+from src.models.core import CoreModel, DateTimeModelMixin, IDModelMixin
 
 
 class BlogPostBase(CoreModel):
@@ -8,7 +8,6 @@ class BlogPostBase(CoreModel):
 
     title: str
     content: str
-    username: str
 
 
 class CreateBlogPost(BlogPostBase):
@@ -17,14 +16,21 @@ class CreateBlogPost(BlogPostBase):
     pass
 
 
-class BlogPostPublic(BlogPostBase, DateTimeModelMixin):
+class BlogPostPublic(BlogPostBase, DateTimeModelMixin, IDModelMixin):
     """Public Blog Post model"""
 
     pass
 
 
-class BlogPostInDB(BlogPostBase, DateTimeModelMixin):
+class UpdateBlogPost(BlogPostBase):
+    pass
+
+
+class BlogPostInDB(BlogPostBase, DateTimeModelMixin, IDModelMixin):
     """Blog Post Model in Database"""
 
-    post_uuid: str
     user_uuid: str
+
+
+class UpdateBlogPostInDB(BlogPostBase, IDModelMixin):
+    pass

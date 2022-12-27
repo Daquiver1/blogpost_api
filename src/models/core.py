@@ -17,7 +17,7 @@ class CoreModel(BaseModel):
 class IDModelMixin(BaseModel):
     """ID data."""
 
-    id: str
+    post_id: int
 
 
 class DateTimeModelMixin(BaseModel):
