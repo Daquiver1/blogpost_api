@@ -9,41 +9,43 @@ from typing import Union
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from src.core.config import CLIENT_ID, SECRET_KEY
+from src.api.dependencies.database import get_repository
+from src.core.config import SECRET_KEY
+from src.db.repositories.users import UserRepository
+from src.models.users import UserInDB, UserPublic
 
 # from src.db.repositories.users import UsersRepository
 from src.services.auth import AuthService
 
 auth_service = AuthService()
-logger = logging.getLogger(__name__)
 
-reuseable_oauth = OAuth2PasswordBearer(
-    tokenUrl="api/authenticate-client/", scheme_name="JWT"
-)
+reuseable_oauth = OAuth2PasswordBearer(tokenUrl="user/authenticate/", scheme_name="JWT")
 
 
-async def get_client_from_token(
-    # *,
+async def get_user_from_token(
+    *,
     token: str = Depends(reuseable_oauth),
-) -> Union[str, None]:
+    user_repo: UserRepository = Depends(get_repository(UserRepository)),
+) -> Union[UserInDB, UserPublic, None]:
     """Get user token."""
     try:
-        client_id = auth_service.get_data_from_token(
+        username = auth_service.get_data_from_token(
             token=token, secret_key=str(SECRET_KEY)
         )
+        user = await user_repo.get_user_by_username(username=username)
     except Exception:
         raise
-    return client_id
+    return user
 
 
-def get_current_active_client(
-    current_user_id: str = Depends(get_client_from_token),
+def get_current_active_user(
+    current_user: UserInDB = Depends(get_user_from_token),
 ) -> str:
     """Get current active user from token."""
-    if current_user_id != CLIENT_ID:
+    if not current_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="No authenticated user.",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    return current_user_id
+    return current_user

@@ -2,8 +2,9 @@
 
 # Third party imports
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
 
+from src.api.routes.blog_post import router as blog_post_router
+from src.api.routes.users import router as user_router
 from src.core import config, tasks
 
 
@@ -18,6 +19,9 @@ def get_application() -> FastAPI:
     @app.get("/", name="index")
     async def index() -> str:
         return "Visit ip_addrESs:8000/docs or localhost8000/docs to view documentation."
+
+    app.include_router(blog_post_router, prefix="/blog_post")
+    app.include_router(user_router, prefix="/user")
 
     return app
 
