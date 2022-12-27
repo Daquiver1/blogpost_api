@@ -57,7 +57,7 @@ class AuthService:
         """Create access token for user."""
         access_token = None
 
-        if not user or not isinstance(user, UserPublic):
+        if not user:
             return None
 
         jwt_meta = JWTMeta(
@@ -91,4 +91,4 @@ class AuthService:
                 detail="Could not validate token credentials.",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-        return payload.email
+        return payload.username
