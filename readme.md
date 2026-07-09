@@ -1,6 +1,6 @@
 # BlogPostAPI
 
-Endpoints for Blog Post API
+Endpoints for Blog Post API v3
 
 ## Requirement and Installation
 
