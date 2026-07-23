@@ -6,7 +6,7 @@ from src.models.core import CoreModel, DateTimeModelMixin, IDModelMixin
 class BlogPostBase(CoreModel):
     """Blog Post Model"""
 
-    title: str
+    title: int
     content: float
 
 
