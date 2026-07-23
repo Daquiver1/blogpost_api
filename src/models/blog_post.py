@@ -7,7 +7,7 @@ class BlogPostBase(CoreModel):
     """Blog Post Model"""
 
     title: int
-    content: str
+    content: float
 
 
 class CreateBlogPost(BlogPostBase):
